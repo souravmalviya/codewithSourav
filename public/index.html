@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    async function signup(){
+        const username= document.getElementById("signup-username").value
+        const password= document.getElementById("signup-password").value
+
+        await axios.post("http://localhost:3000/signup", {
+            username: username, 
+            password : password
+        }) // awited as it will take time and thats why he has given a promise to give data
+        alert("You are Signed up")
+
+    }
+    async function signin(){
+        const username= document.getElementById("signup-username").value
+        const password= document.getElementById("signup-password").value
+
+        const response= axios.post("http://localhost:3000/signin", {
+            username: username, 
+            password : password
+        }) // awited as it will take time and thats why he has given a promise to give data
+        localStorage.setItem("token", response.data.token); //storing the data here in llocal storage in browser 
+        alert("Signed in successfully");
+
+
+    }
+</script>
+<body>
+    <div>
+         SignUp
+         <input id= "signup-username" name="username" placeholder="Username">
+         <input id= "signup-password" name="password" placeholder="password">
+         <button onclick="signup()">Submit</button>
+
+    </div>
+
+    <div>
+         Signin
+         <input id= "signin-username" name="username" placeholder="Username">
+         <input id= "signin-password" name="password" placeholder="password">
+         <button onclick="signin()">Submit</button>
+
+    </div>
+
+    <div>
+        User Information
+        <div id="information"></div>
+    </div>
+    <br>
+
+    <div>
+        <button onclick="Logout()">Logout</button>
+    </div>
+    
+</body>
+</html>
