@@ -18,10 +18,12 @@
     <input id="signin-password" type="password" placeholder="Password">
     <button onclick="signin()">Sign In</button>
 
-    <h2>User Info (Protected Route)</h2>
+    <h2>User Info</h2>
     <div id="information"></div>
-    <button onclick="Logout()">Logout</button>
-
+    
+    <div><button onclick="Logout()">Logout</button>
+</div>
+    
     <script>
         async function signup() {
             const username = document.getElementById("signup-username").value;
@@ -53,13 +55,13 @@
                 alert("Sign-in successful!");
 
                 // Fetch protected user info
-                const userRes = await axios.get("http://localhost:3000/me", {
+                const getresponce = await axios.get("http://localhost:3000/me", {
                     headers: {
                         token: token
                     }
                 });
 
-                document.getElementById("information").innerText = "Logged in as: " + userRes.data.message;
+                document.getElementById("information").innerText = "Logged in as: " + getresponce.data.message;
             } catch (err) {
                 alert("Sign-in failed: " + (err.response?.data?.message || "Unknown error"));
             }
